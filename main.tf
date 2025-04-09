@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "main" {
 
 # Storage Account
 resource "azurerm_storage_account" "storage" {
-  name                     = "mystorageacct_prachi" # must be globally unique
+  name                     = "mystorageacctprachi" # must be globally unique
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
