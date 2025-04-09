@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "main" {
 
 # Storage Account
 resource "azurerm_storage_account" "storage" {
-  name                     = "mystorageacct123" # must be globally unique
+  name                     = "mystorageacct_prachi" # must be globally unique
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
@@ -58,11 +58,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location            = azurerm_resource_group.main.location
   size                = "Standard_B1s"
   admin_username      = "azureuser"
+  admin_password      = "Pas12sword34!"  # Not recommended for production
+  disable_password_authentication = false
+
   network_interface_ids = [
     azurerm_network_interface.nic.id,
   ]
-
-  admin_password = "Password1234!"  # Not recommended for production
 
   os_disk {
     caching              = "ReadWrite"
@@ -72,8 +73,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
 }
